@@ -8,10 +8,10 @@ SoftwareSerial ESP11 = SoftwareSerial(2,3);
 #define USER_AGENT "UbidotsESP8266"
 #define VERSION "1.1"
 #define TOKEN "8jyhmm2dO4wLOPymuwxlQQ7AkzD1cq"
-#define wifiSSID "PLDTHOMEDSL"
-#define wifiPASSWORD "mementom0r1"
-//#define wifiSSID "phyre"
-//#define wifiPASSWORD "c4pst0n3pr0j3ct"
+//#define wifiSSID "PLDTHOMEDSL"
+//#define wifiPASSWORD "mementom0r1"
+#define wifiSSID "phyre"
+#define wifiPASSWORD "c4pst0n3pr0j3ct"
 int smokeA0 = A0;
 int redLed = 12;
 int greenLed = 13;
@@ -24,17 +24,18 @@ void setup()
       ESP11.begin(9600);
       connectToWifi(wifiSSID,wifiPASSWORD);
       setupTCPConnection(SERVER,PORT);
-//      String data = "{\"wifi\":1}";
-//      int i  = data.length();
-//      String toPost = "POST /api/v1.6/devices/test/?token=8jyhmm2dO4wLOPymuwxlQQ7AkzD1cq HTTP/1.1\r\n"
-//                "Host: things.ubidots.com\r\n"
-//                "User-Agent:" + String(USER_AGENT) + "/" + String(VERSION) + "\r\n"
-//                "Content-Type: application/json\r\n"
-//                "Content-Length: " + String(i) + "\r\n"
-//                "\r\n"
-//                + data +
-//                "\r\n";
-      //sendData(toPost,1000,DEBUG);
+      String data = "{\"wifi\":1}";
+      int i  = data.length();
+      String toPost = "POST /api/v1.6/devices/test/?token=8jyhmm2dO4wLOPymuwxlQQ7AkzD1cq HTTP/1.1\r\n"
+                "Host: things.ubidots.com\r\n"
+                "User-Agent:" + String(USER_AGENT) + "/" + String(VERSION) + "\r\n"
+                "Content-Type: application/json\r\n"
+                "Content-Length: " + String(i) + "\r\n"
+                "\r\n"
+                + data +
+                "\r\n";
+      sendData(toPost,1000,DEBUG);
+      sendData(toPost,1000,DEBUG);
       Serial.print("\nWIFI SETUP DONE.....\n");
       pinMode(redLed, OUTPUT);
       pinMode(greenLed, OUTPUT);
